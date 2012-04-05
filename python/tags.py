@@ -2,7 +2,7 @@ import csv
 import operator
 
 
-with open('event_short.csv','rb') as f:
+with open('../data/event_short.csv','rb') as f:
 	r = csv.reader(f)
 	d = {}
 	for row in r:
@@ -15,4 +15,8 @@ with open('event_short.csv','rb') as f:
 			else:
 				d[tag] = 1
 sorted_d = sorted(d.iteritems(), key=operator.itemgetter(1), reverse=True)
-print sorted_d
+
+outfile = open ('../data/tags.csv','w')
+for entry in sorted_d:
+	outfile.write(entry[0]+ "," + str(entry[1]) + "\n")
+        outfile.flush()
